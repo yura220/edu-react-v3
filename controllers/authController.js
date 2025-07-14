@@ -67,3 +67,16 @@ export const login = async (req, res) => {
     res.status(500).json({ message: '로그인 처리 중 오류 발생' });
   }
 };
+export const logout = (req, res) => {
+  // JWT를 저장한 쿠키를 삭제
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: true, // HTTPS 환경에서만 쿠키 전달
+    sameSite: 'None', // 크로스 도메인일 경우 필요
+  });
+  res.status(200).json({ message: '로그아웃 완료' });
+};
+
+export const getMe = async (req, res) => {
+  res.status(200).json({ message: '사용자 정보 조회' });
+};
