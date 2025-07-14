@@ -26,5 +26,6 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+// ✅ 잘린 부분 수정
 const User = mongoose.model('User', userSchema);
 export default User;
