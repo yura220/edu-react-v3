@@ -75,8 +75,10 @@ export const logout = (req, res) => {
     sameSite: 'None', // 크로스 도메인일 경우 필요
   });
   res.status(200).json({ message: '로그아웃 완료' });
+  
 };
 
 export const getMe = async (req, res) => {
   res.status(200).json({ message: '사용자 정보 조회' });
 };
+

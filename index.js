@@ -6,12 +6,14 @@ import mongoose from 'mongoose';
 
 import authRoutes from './routes/auth.js';
 import courseRoutes from './routes/courses.js';
+import uploadRoutes from './routes/uploadRoutes.js'; // ✅✅✅ 삭제
+import adminRoutes from './routes/admin.js';
 
 dotenv.config();
 
 const app = express();
 
-// ✅ CORS 설정
+// CORS 설정
 const whitelist = [
   'http://localhost:5173',
   'https://eduai-react-v3-fm.vercel.app'
@@ -20,16 +22,20 @@ app.use(cors({ origin: whitelist, credentials: true }));
 
 app.use(express.json());
 
-// ✅ 라우터 등록
+// 라우터 등록
 app.use('/api/auth', authRoutes);
 app.use('/api', courseRoutes);
 
-// ✅ DB 연결 및 서버 실행
+
+// app.use('/api', uploadRoutes);
+app.use('/api/admin', adminRoutes); //✅✅✅ admin경로요청시  adminRoutes작동
+
+// DB 연결 및 서버 실행
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
-    console.log('✅ MongoDB 연결 성공');
+    console.log(' MongoDB 연결 성공');
     app.listen(5000, () => {
-      console.log('✅ 서버 실행 중: http://localhost:5000');
+      console.log('서버 실행 중: http://localhost:5000');
     });
   })
   .catch((err) => console.error('❌ DB 연결 실패:', err));
