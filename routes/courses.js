@@ -5,7 +5,7 @@ import {
   addFavorite,
   getFavorites,
 } from '../controllers/courseController.js';
-import { authMiddleware } from '../middleware/authMiddleware.js'; // // ✅✅✅ 찜 등록시 사용
+import { authMiddleware } from '../middlewares/authMiddleware.js'; // // ✅✅✅ 찜 등록시 사용
 
 const router = express.Router();
 
