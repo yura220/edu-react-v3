@@ -2,7 +2,7 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
-export const authMiddleware = async (req, res, next) => {
+export const isAuth = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {

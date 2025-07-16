@@ -1,6 +1,6 @@
 // server/routes/admin.js
 import express from 'express';
-import isAuth from '../middlewares/authMiddleware.js';
+import {isAuth} from '../middlewares/authMiddleware.js';
 import isAdmin from '../middlewares/isAdmin.js';
 import upload from '../middlewares/cloudinaryUploader.js'; // ✅✅✅ ← 추가할 부분
 import { getDashboardStats, getAllUsers,uploadImage, getImages } from '../controllers/adminController.js';  // ✅✅✅ ← 추가할 부분
