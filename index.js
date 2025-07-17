@@ -6,7 +6,6 @@ import mongoose from 'mongoose';
 
 import authRoutes from './routes/auth.js';
 import courseRoutes from './routes/courses.js';
-import uploadRoutes from './routes/uploadRoutes.js'; // ✅✅✅ 삭제
 import adminRoutes from './routes/admin.js';
 
 dotenv.config();
@@ -18,7 +17,20 @@ const whitelist = [
   'http://localhost:5173',
   'https://eduai-react-v3-fm.vercel.app'
 ];
-app.use(cors({ origin: whitelist, credentials: true }));
+// app.use(cors({ origin: whitelist, credentials: true }));
+
+// ✅✅✅ 추가
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || whitelist.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
 
 app.use(express.json());
 
