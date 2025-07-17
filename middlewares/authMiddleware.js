@@ -2,10 +2,10 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
-export const authMiddleware = async (req, res, next) => {S
+export const authMiddleware = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {S
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({ message: '인증 토큰이 없습니다.' });
   }
 
