@@ -15,6 +15,7 @@ export const getAllUsers = async (req, res) => {
 // ✅✅✅ 이미지 업로드 컨트롤러
 export const uploadImage = async (req, res) => {
   try {
+    console.log('📂 req.file:', req.file);  // ← 파일 업로드 여부 확인용
     const url = req.file?.path;
     const public_id = req.file?.filename; // Cloudinary가 생성한 ID
 
@@ -28,6 +29,7 @@ export const uploadImage = async (req, res) => {
 
     res.json({ url });
   } catch (err) {
+    console.error('❌ 이미지 업로드 실패:', err); // ✅ 로그 필수!
     res.status(500).json({ error: '이미지 업로드 실패' });
   }
 };
