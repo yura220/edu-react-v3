@@ -19,7 +19,7 @@ const whitelist = [
 ];
 // app.use(cors({ origin: whitelist, credentials: true }));
 
-// ✅✅✅ 추가
+// ✅✅✅ 추가1
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || whitelist.includes(origin)) {
