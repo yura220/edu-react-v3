@@ -37,6 +37,7 @@ export const uploadImage = async (req, res) => {
 // ✅✅✅ 이미지 목록 불러오기 컨트롤러
 export const getImages = async (req, res) => {
   try {
+    console.log('🔍 이미지 리스트 요청 by', req.user?.id);  // ✅✅✅ 추가1 로그 필수!
     const result = await cloudinary.api.resources({
       type: 'upload',
       prefix: 'admin-uploads/',
@@ -44,6 +45,9 @@ export const getImages = async (req, res) => {
     });
     res.json(result.resources); // 배열 반환
   } catch (err) {
-    res.status(500).json({ error: 'Cloudinary 이미지 조회 실패' });
+    // res.status(500).json({ error: 'Cloudinary 이미지 조회 실패' });
+    // ✅✅✅ 추가2 로그 필수!
+    console.error('❌ Cloudinary API 오류:', err); // ← 핵심 로그 
+    res.status(500).json({ error: 'Cloudinary 이미지 조회 실패', detail: err.message });
   }
 };
