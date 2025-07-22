@@ -38,6 +38,12 @@ export const uploadImage = async (req, res) => {
 // ✅이미지 목록 불러오기 컨트롤러
 export const getImages = async (req, res) => {
   try {
+
+    // ✅✅ 수정된 MongoDB 조회 방식
+    const images = await Image.find().sort({ createdAt: -1 }); // 최신순 정렬
+    console.log('📦 MongoDB에서 불러온 이미지 수:', images.length); // ✅ 개수 로그
+    res.json(images); // 배열 반환
+
     console.log('🔍 이미지 리스트 요청 by', req.user?.id);  // 추가1✅✅  로그 필수!
     const result = await cloudinary.api.resources({
       type: 'upload',
@@ -48,7 +54,7 @@ export const getImages = async (req, res) => {
   } catch (err) {
     // res.status(500).json({ error: 'Cloudinary 이미지 조회 실패' });
     // 추가2 ✅✅  로그 필수!
-    console.error('❌ Cloudinary API 오류:', err); // ← 핵심 로그 
+    console.error('❌ Cloudinary API 오류:', err); // ← 핵심 로그
     res.status(500).json({ error: 'Cloudinary 이미지 조회 실패', detail: err.message });
   }
 };
